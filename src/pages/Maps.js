@@ -4,36 +4,38 @@ import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import api from '../services/api';
 // import { Marker } from 'react-native-maps';
 
-export default function App({route}) {
+export function Maps({route}) {
   
-  const infoLocationUser = route.params.coords;
+  // const infoLocationUser = route.params.coords;
   const [empresas, setEmpresas] = useState(false);
 
-  useEffect(() => {
-    api.get('api/options', {params: {
-      lat: infoLocationUser.latitude,
-      lon: infoLocationUser.longitude
-    }}).then((resp) => {
-      console.log('RESP SERVIDOR', resp.data)
-      setEmpresas(resp.data)
-      console.log('MEU ARRAY', empresas.list)
-    }).catch((err) => {
-      console.log('erro ao pegar lista de empresas', err)
-    })
-  },[])
+  console.log('informações que cegaram na rota do map pelo route', route)
 
-  {empresas ? 
-    empresas.list.map((item) => {
-      console.log('determinadas infos',item)
-    })
-  :
-    null
-  }
+  // useEffect(() => {
+  //   api.get('api/options', {params: {
+  //     lat: infoLocationUser.latitude,
+  //     lon: infoLocationUser.longitude
+  //   }}).then((resp) => {
+  //     console.log('RESP SERVIDOR', resp.data)
+  //     setEmpresas(resp.data)
+  //     console.log('MEU ARRAY', empresas.list)
+  //   }).catch((err) => {
+  //     console.log('erro ao pegar lista de empresas', err)
+  //   })
+  // },[])
+
+  // {empresas ? 
+  //   empresas.list.map((item) => {
+  //     console.log('determinadas infos',item)
+  //   })
+  // :
+  //   null
+  // }
 
   
   return (
     <View style={styles.container}>
-      <MapView  
+      {/* <MapView  
         style={styles.map}
         initialRegion={{
           latitudeDelta: 0.0922,
@@ -69,7 +71,7 @@ export default function App({route}) {
       :
         null
       }
-    </MapView>
+    </MapView> */}
     </View>
   );
 }
