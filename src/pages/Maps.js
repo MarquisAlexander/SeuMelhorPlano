@@ -2,68 +2,48 @@ import React, {useEffect, useState} from 'react';
 import MapView,{Marker} from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import api from '../services/api';
-// import { Marker } from 'react-native-maps';
 
 export function Maps({route}) {
   
-  // const infoLocationUser = route.params.coords;
   const [empresas, setEmpresas] = useState(false);
 
   console.log('informações que cegaram na rota do map pelo route', route)
 
-  // useEffect(() => {
-  //   api.get('api/options', {params: {
-  //     lat: infoLocationUser.latitude,
-  //     lon: infoLocationUser.longitude
-  //   }}).then((resp) => {
-  //     console.log('RESP SERVIDOR', resp.data)
-  //     setEmpresas(resp.data)
-  //     console.log('MEU ARRAY', empresas.list)
-  //   }).catch((err) => {
-  //     console.log('erro ao pegar lista de empresas', err)
-  //   })
-  // },[])
-
-  // {empresas ? 
-  //   empresas.list.map((item) => {
-  //     console.log('determinadas infos',item)
-  //   })
-  // :
-  //   null
-  // }
-
+  const locationUser = route.params.infoLocationUser;
+  const locationPlans = route.params.plans;
+  const pinColor = '#000000';
+  console.log('informações de localização dos planos', locationPlans)
   
   return (
     <View style={styles.container}>
-      {/* <MapView  
+      <MapView  
         style={styles.map}
         initialRegion={{
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
-          latitude: infoLocationUser.latitude,
-          longitude: infoLocationUser.longitude,
+          latitude: locationUser.latitude,
+          longitude: locationUser.longitude,
         }}
       >
       <Marker
         coordinate={{
-          latitude: infoLocationUser.latitude,
-          longitude: infoLocationUser.longitude
+          latitude: locationUser.latitude,
+          longitude: locationUser.longitude
         }}
         title='Estou bem aqui'
-        // description={marker.description}
       />
-      {empresas ? 
-        empresas.list.map((item) => (
+      {locationPlans ? 
+        locationPlans.map((item) => (
           <Marker
             coordinate={{
               latitude: item.coords.lat,
               longitude: item.coords.lon
             }}
             pinColor={
-              item.type === 'TV' && '#32B768'||
-              // item.type === 'BROADBAND' && '#000000' ||
-              item.type === 'LANDLINE' && '#0074D0'
-              // item.type === 'ADDON' && '#5C6660'
+              item.type === 'TV' && '#32B768'|| //verde
+              item.type === 'LANDLINE' && '#0074D0' ||//azul
+              item.type === 'BROADBAND' && 'red' ||
+              item.type === 'ADDON' && 'linen'
             }
             title='Estou bem aqui'
           />
@@ -71,7 +51,7 @@ export function Maps({route}) {
       :
         null
       }
-    </MapView> */}
+    </MapView>
     </View>
   );
 }
