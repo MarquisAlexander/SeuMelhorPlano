@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Platform, Text, View, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { Text, View, ActivityIndicator } from 'react-native';
 import * as Location from 'expo-location';
+import {styles} from './styles';
+import {Button} from '../../components/Button';
 
-const {height, width} = Dimensions.get('window');
 
 export function GetLocation({navigation}) {
-  const [location, setLocation] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
   const [coords, setCoords] = useState();
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState();
@@ -22,7 +21,7 @@ export function GetLocation({navigation}) {
       });
     });
     if (status !== 'granted') {
-      setErrorMsg('Permission to access location was denied');
+      console.log('Permission to access location was denied');
       return;
     } else {
       console.log('acesso a localização permitido')
@@ -41,47 +40,13 @@ export function GetLocation({navigation}) {
       :
         null
       }
-      <TouchableOpacity
+      <Button 
         disabled={loading}
+        loading={loading}
         style={[styles.containerButton, {opacity: loading ? 0.5 : 1}]}
+        title='Ver Promoções'
         onPress={() => navigation.navigate('Offers', {coords})}
-      >
-          <Text style={styles.textButton}>Ver promoções</Text>
-      </TouchableOpacity>
+      />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-around',
-  },
-  containerButton: {
-    backgroundColor: "#32B768",
-    height: (height * 10) / 100,
-    width: (width * 90) / 100,
-    borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-},
-textButton: {
-    color: '#fff'
-},
-containerTitle: {
-  alignItems: 'center',
-  paddingHorizontal: (width * 2) / 100,
-},
-text: {
-  color: '#52665A',
-  fontSize: 14, 
-  marginTop: 20,
-  textAlign: 'center'
-},
-paragraph: {
-    fontSize: 14,
-    color: '#52665A',
-    textAlign: 'center'
-}
-}); 

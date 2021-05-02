@@ -1,18 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import MapView,{Marker} from 'react-native-maps';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
-import api from '../services/api';
+import { View } from 'react-native';
+import {styles} from './styles';
 
 export function Maps({route}) {
   
-  const [empresas, setEmpresas] = useState(false);
-
-  console.log('informações que cegaram na rota do map pelo route', route)
-
   const locationUser = route.params.infoLocationUser;
   const locationPlans = route.params.plans;
-  const pinColor = '#000000';
-  console.log('informações de localização dos planos', locationPlans)
   
   return (
     <View style={styles.container}>
@@ -45,7 +39,8 @@ export function Maps({route}) {
               item.type === 'BROADBAND' && 'red' ||
               item.type === 'ADDON' && 'linen'
             }
-            title='Estou bem aqui'
+            title={`Plano de ${item.type}`}
+            description={`Valor individual do serviço R$ ${item.price}`}
           />
         ))
       :
@@ -56,15 +51,3 @@ export function Maps({route}) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  map: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
-  },
-});

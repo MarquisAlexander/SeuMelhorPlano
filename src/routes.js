@@ -5,11 +5,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import {GetLocation} from './pages/GetLocation';
 import {Welcome} from './pages/Welcome';
 import {Maps} from './pages/Maps';
-import {Offers} from './pages/Offers';
+import {Offers} from './pages/OffersList';
 
 const Stack = createStackNavigator();
 
-function StackNavigation() {
+export function StackNavigation() {
   return (
     <NavigationContainer>
         <Stack.Navigator>
@@ -43,4 +43,4 @@ function StackNavigation() {
   );
 }
 
-export default StackNavigation;
+// export default StackNavigation;

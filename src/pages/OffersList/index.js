@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from 'react';
-import {View, Text, TouchableOpacity, FlatList, StyleSheet, Platform} from 'react-native';
-import api from '../services/api';
+import {View, Text, TouchableOpacity, FlatList, ActivityIndicator} from 'react-native';
+import api from '../../services/api';
+import {styles} from './styles'
 
 export function Offers({navigation, route}) {
     const infoLocationUser = route.params.coords;
@@ -15,7 +15,6 @@ export function Offers({navigation, route}) {
     const [bestPlansAddon, setBestPlansAddon] = useState([]);
     const [bestPlanAddon, setBestPlanAddon] = useState();
     const [count, setCount] = useState(0);
-    const [counts, setCounts] = useState(0);
     let plans = [];
 
     useEffect(() => {
@@ -135,20 +134,11 @@ export function Offers({navigation, route}) {
                     }}
                     ItemSeparatorComponent = {FlatListItemSeparator}
                 />
-            : null}
+            : 
+                <View style={styles.loadingPage}>
+                    <ActivityIndicator color="#32B768"/>
+                </View>
+            }
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    containerCardOffer: {
-        backgroundColor: "#32B768",
-        marginHorizontal: 5,
-        borderRadius: 5,
-        padding: 10
-    },
-    text: {
-        color: '#fff',
-        fontSize: 16,
-    }
-})
