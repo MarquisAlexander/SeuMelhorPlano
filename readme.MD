@@ -1,5 +1,5 @@
 <h2 align="center">
-  🚀 ChallengeOctupus
+  🚀 App seuMelhorPlano
 </h2>
 
 <p align="center">
